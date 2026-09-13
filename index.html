@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>电池模组装配基地 · 虚拟仿真</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/styles/main.css" />
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="viewport"></canvas>
+
+      <header class="hud hud-top">
+        <div class="brand">
+          <span class="brand-mark"></span>
+          <div>
+            <h1>电池模组装配基地</h1>
+            <p class="subtitle">Digital Twin · 总览</p>
+          </div>
+        </div>
+        <div class="metrics" id="global-metrics">
+          <div class="metric">
+            <span class="metric-label">在线设施</span>
+            <span class="metric-value" data-key="online">—</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">今日产能</span>
+            <span class="metric-value" data-key="output">—</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">港口吞吐</span>
+            <span class="metric-value" data-key="throughput">—</span>
+          </div>
+          <div class="metric">
+            <span class="metric-label">运行状态</span>
+            <span class="metric-value status-ok" data-key="status">正常</span>
+          </div>
+        </div>
+      </header>
+
+      <aside class="hud hud-left" id="facility-list">
+        <h2>设施索引</h2>
+        <ul id="facility-items"></ul>
+      </aside>
+
+      <section class="hud hud-detail hidden" id="detail-panel">
+        <button type="button" class="close-btn" id="detail-close" aria-label="关闭">×</button>
+        <p class="detail-type" id="detail-type"></p>
+        <h2 id="detail-name"></h2>
+        <p class="detail-desc" id="detail-desc"></p>
+        <dl class="detail-stats" id="detail-stats"></dl>
+      </section>
+
+      <aside class="hud hud-process" id="process-panel">
+        <div class="process-head">
+          <h2>工艺与交通</h2>
+          <div class="process-actions">
+            <button type="button" id="btn-pause" class="btn btn-primary">暂停仿真</button>
+            <button type="button" id="btn-fault" class="btn btn-ghost">触发故障</button>
+          </div>
+        </div>
+
+        <div class="alarm" id="alarm-banner" hidden></div>
+
+        <div class="block">
+          <h3>模组拆解</h3>
+          <label class="slider-row">
+            <span>拆解程度</span>
+            <input type="range" id="explode-range" min="0" max="100" value="0" />
+          </label>
+          <div class="layer-chips" id="layer-toggles"></div>
+        </div>
+
+        <div class="block">
+          <h3>设备状态</h3>
+          <div id="arm-status" class="status-list"></div>
+          <div id="inspection-status" class="status-list"></div>
+        </div>
+
+        <div class="block">
+          <h3>路网交通</h3>
+          <div id="signal-status" class="status-list"></div>
+          <div id="vehicle-status" class="status-list compact"></div>
+        </div>
+      </aside>
+
+      <aside class="hud hud-tour" id="tour-panel">
+        <div class="tour-row">
+          <button type="button" id="btn-tour" class="btn btn-primary">开始巡游</button>
+          <button type="button" id="btn-tour-prev" class="btn btn-ghost" aria-label="上一镜头">‹</button>
+          <button type="button" id="btn-tour-next" class="btn btn-ghost" aria-label="下一镜头">›</button>
+          <span class="tour-label" id="tour-label">手动视角</span>
+        </div>
+        <div class="shot-chips" id="shot-chips"></div>
+      </aside>
+
+      <footer class="hud hud-bottom">
+        <div class="hint">左键旋转 · 右键平移 · 滚轮缩放 · 点击聚焦 · 鼠标操作可随时接管巡游</div>
+        <div class="clock" id="sim-clock">--:--:--</div>
+      </footer>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
